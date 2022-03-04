@@ -1,0 +1,17 @@
+query {
+  allProject {
+    name,
+    slug {current},
+    image{asset{
+      url,
+    }},
+    description,
+    link,
+    techologies{
+      name,
+      logo {asset{url, altText}}
+      link
+    },
+    color {hex}
+  }
+}

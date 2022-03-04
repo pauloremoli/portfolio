@@ -3,6 +3,8 @@ import Image from "next/image";
 import React from "react";
 import { useProjectsQuery } from "../graphql/generated/graphql";
 
+const bgColors = ["bg-green-200", "bg-teal-300", "bg-cyan-200", "bg-indigo-200", "bg-rose-300"]
+
 const Project: React.FC = () => {
   const { data, loading, error } = useProjectsQuery();
 
@@ -21,14 +23,20 @@ const Project: React.FC = () => {
     console.log(data);
   }
   return (
-    <section className="w-screen flex flex-col  justify-center items-center snap-start">
-      {data?.allProject.map((project) => {
-        const { name, slug, description, link , color} = project;
+    
+
+      data?.allProject.map((project, index) => {
+        
+        const { name, slug, description, link } = project;
+        console.log(bgColors[index % 5]);
+        
+
         return (
-          <div key={slug?.current} className= ` w-screen h-screen m-40 ${color.hex}`>
-            <h1 className="text-4xl  p-2">{name}</h1>
+          
+        <section key={slug?.current} className={`"w-full h-full  flex flex-col justify-center items-center snap-start ${bgColors[index % bgColors.length]}`}>
+            <h1 className="text-4xl  p-2 font-bold">{name}</h1>
             <span className="text-xl  p-2">{description}</span>
-            <h3 className="m-6 font-semibold text-xl text-blue-900">
+            <h3 className="m-6 font-semibold text-xl text-blue-900 mt-20">
               Technologies:
             </h3>
 
@@ -37,13 +45,14 @@ const Project: React.FC = () => {
                 return (
                   <div key={tech!.name} className="">
                     {tech?.logo?.asset?.url && (
+                      
                       <Link href={tech.link!}>
                         <a target="_blank">
                           <Image
                             src={tech.logo.asset.url!}
                             alt={tech.name!}
-                            width={100}
-                            height={60}
+                            width={120}
+                            height={80}
                           />
                         </a>
                       </Link>
@@ -58,10 +67,9 @@ const Project: React.FC = () => {
                 {link!}
               </a>
             </Link>
-          </div>
+          </section>
         );
-      })}
-    </section>
+      })
   );
 };
 

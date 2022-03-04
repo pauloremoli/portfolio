@@ -1,4 +1,4 @@
-query {
+query projects{
   allProject {
     name,
     slug {current},

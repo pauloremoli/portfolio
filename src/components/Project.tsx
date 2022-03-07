@@ -16,11 +16,8 @@ import useRefs from "react-use-refs";
 import Laptop from "./Laptop";
 
 const bgColors = [
-  "bg-green-200",
-  "bg-teal-300",
-  "bg-cyan-200",
-  "bg-indigo-200",
-  "bg-rose-300",
+  "bg-gray-200",
+  "bg-gray-300",
 ];
 
 const Project: React.FC = () => {
@@ -42,14 +39,11 @@ const Project: React.FC = () => {
   }
   return data?.allProject.map((project, index) => {
     const { name, slug, description, link } = project;
-    console.log(bgColors[index % 5]);
 
     return (
       <section
         key={slug?.current}
-        className={`w-full h-full py-14 px-4 flex-wrap flex flex-col snap-start ${
-          bgColors[index % bgColors.length]
-        }`}
+        className={`w-full h-full py-14 px-4 flex-wrap flex flex-col snap-start ${bgColors[index % bgColors.length]}`}
       >
         <div id="left" className="w-full h-full py-8 md:w-1/2">
           <Canvas
@@ -62,17 +56,22 @@ const Project: React.FC = () => {
             </Suspense>
           </Canvas>
         </div>
-        <div id="right" className="flex flex-col justify-center items-start w-full h-full md:w-1/2 ">
-          <h1 className="text-4xl  p-2 font-bold">{name}</h1>
-          <span className="text-xl  p-2">{description}</span>
-          <h3 className="m-6 font-semibold text-xl text-blue-900 mt-20">
-            Technologies:
-          </h3>
+        <div
+          id="right"
+          className="flex flex-col justify-center items-start w-full h-full md:w-1/2 pl-4 md:pl-20"
+        >
+          <h1 className="text-4xl font-bold text-indigo-700">{name}</h1>
+          <span className="text-xl pt-12">{description}</span>
+          <Link href={link!}>
+            <a target="_blank" className="text-lg mt-4 mb-20 font-semibold hover:font-bold hover:text-indigo-800">
+              {link!}
+            </a>
+          </Link>
 
-          <div className="flex flex-wrap gap-4 basis-1/3">
+          <div className="flex flex-wrap gap-8">
             {project.techologies!.map((tech) => {
               return (
-                <div key={tech!.name} className="w-1/4 box-border">
+                <div key={tech!.name} className="w-1/4 h-16 box-border">
                   {tech?.logo?.asset?.url && (
                     <Link href={tech.link!}>
                       <a target="_blank">
@@ -89,12 +88,6 @@ const Project: React.FC = () => {
               );
             })}
           </div>
-
-          <Link href={link!}>
-            <a target="_blank" className="text-xl mt-14 font-thin">
-              {link!}
-            </a>
-          </Link>
         </div>
       </section>
     );

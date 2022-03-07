@@ -68,30 +68,16 @@ function Cloud({ count = 8, radius = 20 }) {
 
 const Intro = () => {
   return (
-    <section className="w-full h-full bg-slate-900 flex flex-col md:flex-row items-start md:items-center snap-start justify-center">
+    <section className="w-full h-full bg-black flex flex-col md:flex-row items-start md:items-center snap-start justify-center">
       <div id="left" className="w-full md:w-1/3 h-full flex flex-col justify-around p-2 md:p-20">
         <div className="p-4 flex flex-col">
-          <h1 className="text-2xl md:text-4xl text-blue-200 font-[Sora]">
+          <h1 className="text-2xl md:text-4xl text-gray-200 font-[Sora]">
             Hi there, I'm
           </h1>
           <h1 className="text-3xl md:text-8xl text-red-400 font-bold font-[Sora]">
             Paulo Remoli
           </h1>
-        </div>
-        <div className="text-xl md:text-2xl text-gray-100 font-light p-4">
-          <Typewriter
-            onInit={(typewriter) => {
-              typewriter
-                .changeDelay(100)
-                .changeDeleteSpeed(40)
-                .typeString("After 10 years as C++ software engineer")
-                .pauseFor(200)
-                .start();
-              typewriter
-                .typeString("<br/>It's time to flip the switch")
-                .start();
-            }}
-          />
+          <h3 className="text-2xl uppercase text-white pt-8">Full-stack developer</h3>
         </div>
       </div>
       <div id="right" className="w-full md:w-2/3 h-full relative ">

@@ -46,6 +46,7 @@ const Laptop: React.FC <LaptopProps> = ({ projectImage, ...props }) => {
           enableZoom={false}
           minPolarAngle={Math.PI / 2 + 0.06}
           maxPolarAngle={Math.PI / 2}
+          autoRotate={true}
         />
       </group>
     </>

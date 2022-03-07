@@ -1,0 +1,7 @@
+query technologies {
+  allTechnology {
+    name,
+    link,
+    logo { asset { url } }
+  }
+}

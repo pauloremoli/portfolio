@@ -919,6 +919,11 @@ export type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ProjectsQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', name?: string | null, description?: string | null, link?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null, image?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null, techologies?: Array<{ __typename?: 'Technology', name?: string | null, link?: string | null, logo?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null, altText?: string | null } | null } | null } | null> | null, color?: { __typename?: 'Color', hex?: string | null } | null }> };
 
+export type TechnologiesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TechnologiesQuery = { __typename?: 'RootQuery', allTechnology: Array<{ __typename?: 'Technology', name?: string | null, link?: string | null, logo?: { __typename?: 'Image', asset?: { __typename?: 'SanityImageAsset', url?: string | null } | null } | null }> };
+
 
 export const ProjectsDocument = gql`
     query projects {
@@ -977,3 +982,43 @@ export function useProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type ProjectsQueryHookResult = ReturnType<typeof useProjectsQuery>;
 export type ProjectsLazyQueryHookResult = ReturnType<typeof useProjectsLazyQuery>;
 export type ProjectsQueryResult = Apollo.QueryResult<ProjectsQuery, ProjectsQueryVariables>;
+export const TechnologiesDocument = gql`
+    query technologies {
+  allTechnology {
+    name
+    link
+    logo {
+      asset {
+        url
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTechnologiesQuery__
+ *
+ * To run a query within a React component, call `useTechnologiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTechnologiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTechnologiesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTechnologiesQuery(baseOptions?: Apollo.QueryHookOptions<TechnologiesQuery, TechnologiesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TechnologiesQuery, TechnologiesQueryVariables>(TechnologiesDocument, options);
+      }
+export function useTechnologiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TechnologiesQuery, TechnologiesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TechnologiesQuery, TechnologiesQueryVariables>(TechnologiesDocument, options);
+        }
+export type TechnologiesQueryHookResult = ReturnType<typeof useTechnologiesQuery>;
+export type TechnologiesLazyQueryHookResult = ReturnType<typeof useTechnologiesLazyQuery>;
+export type TechnologiesQueryResult = Apollo.QueryResult<TechnologiesQuery, TechnologiesQueryVariables>;

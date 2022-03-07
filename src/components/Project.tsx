@@ -33,14 +33,14 @@ const Project: React.FC = () => {
 
         return (
           
-        <section key={slug?.current} className={`"w-full h-full  flex flex-col justify-center items-center snap-start ${bgColors[index % bgColors.length]}`}>
+        <section key={slug?.current} className={`"w-full h-full py-14 px-4 flex-wrap flex flex-col justify-center items-center snap-start ${bgColors[index % bgColors.length]}`}>
             <h1 className="text-4xl  p-2 font-bold">{name}</h1>
             <span className="text-xl  p-2">{description}</span>
             <h3 className="m-6 font-semibold text-xl text-blue-900 mt-20">
               Technologies:
             </h3>
 
-            <div className="flex flex-row gap-12">
+            <div className="flex flex-row flex-wrap gap-4 md:gap-12 justify-center">
               {project.techologies!.map((tech) => {
                 return (
                   <div key={tech!.name} className="">

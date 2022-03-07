@@ -1,4 +1,4 @@
-import { Text, TrackballControls, useProgress, Html } from "@react-three/drei";
+import { Text, TrackballControls, useProgress, Html, OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
@@ -7,7 +7,6 @@ import Typewriter from "typewriter-effect";
 function Word({ children, ...props }) {
   const color = new THREE.Color();
   const fontProps = {
-    font: "/Inter-Bold.woff",
     fontSize: 2.5,
     letterSpacing: -0.05,
     lineHeight: 1,
@@ -45,6 +44,8 @@ function Word({ children, ...props }) {
 }
 
 function Cloud({ count = 8, radius = 20 }) {
+
+
   const words = useMemo(() => {
     const temp = [];
     const spherical = new THREE.Spherical();
@@ -65,18 +66,11 @@ function Cloud({ count = 8, radius = 20 }) {
   ));
 }
 
-function Loader() {
-  const { active, progress, errors, item, loaded, total } = useProgress();
-  console.log("Progress", progress);
-  
-  return <Html center>{progress} % loaded</Html>;
-}
-
 const Intro = () => {
   return (
     <section className="w-full h-full bg-slate-900 flex flex-col md:flex-row items-start md:items-center snap-start justify-center">
-      <div id="left" className="w-full md:w-1/2 h-full flex flex-col justify-around p-2 md:p-8">
-        <div className="p-4">
+      <div id="left" className="w-full md:w-1/3 h-full flex flex-col justify-around p-2 md:p-20">
+        <div className="p-4 flex flex-col">
           <h1 className="text-2xl md:text-4xl text-blue-200 font-[Sora]">
             Hi there, I'm
           </h1>
@@ -100,14 +94,14 @@ const Intro = () => {
           />
         </div>
       </div>
-      <div id="right" className="w-full md:w-1/2 h-full relative ">
+      <div id="right" className="w-full md:w-2/3 h-full relative ">
         <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
           <Suspense fallback={null}>
             <fog attach="fog" args={["#202025", 0, 80]} />
             <Cloud count={8} radius={18} />
             <TrackballControls noZoom={true} />
           </Suspense>
-          <Loader />
+          <OrbitControls autoRotate={true} enableZoom={false} autoRotateSpeed={2}/>
         </Canvas>
       </div>
     </section>

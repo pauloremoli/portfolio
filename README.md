@@ -8,3 +8,5 @@ My portfolio
 * TypeScript
 * Apollo Client
 * Graphql code generator
+* react-three-fiber
+* threejs
